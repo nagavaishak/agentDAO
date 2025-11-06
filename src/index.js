@@ -75,14 +75,14 @@ console.log('💰 Using pre-funded wallets...\n');
   );
   await sleep(1000);
 
-  const proposal2 = await dao.createProposal(
-    agents[3],
-    'Community Education Program',
-    'Fund educational initiatives to teach humans about AI agent economies.',
-    0.6,
-    parseFloat(process.env.PROPOSAL_COST_USDC) || 0.01
-  );
-  await sleep(1000);
+  // const proposal2 = await dao.createProposal(
+  //   agents[3],
+  //   'Community Education Program',
+  //   'Fund educational initiatives to teach humans about AI agent economies.',
+  //   0.6,
+  //   parseFloat(process.env.PROPOSAL_COST_USDC) || 0.01
+  // );
+  // await sleep(1000);
 
   console.log('\n═══════════════════════════════════════════════════════\n');
 
@@ -108,23 +108,23 @@ console.log('💰 Using pre-funded wallets...\n');
     await sleep(1500);
   }
 
-  await sleep(2000);
+  // await sleep(2000);
 
-  // Vote on Proposal 2
-  console.log('\n📊 Voting on Proposal #2: "Community Education Program"\n');
+  // // Vote on Proposal 2
+  // console.log('\n📊 Voting on Proposal #2: "Community Education Program"\n');
   
-  for (let i = 0; i < agents.length; i++) {
-    const agent = agents[i];
+  // for (let i = 0; i < agents.length; i++) {
+  //   const agent = agents[i];
     
-    const context = `The DAO is voting on: "${proposal2.title}". Description: ${proposal2.description}. Treasury has ${dao.treasury} SOL. This proposal requests ${proposal2.requestedAmount} SOL.`;
-    const options = ['Vote FOR this proposal', 'Vote AGAINST this proposal'];
+  //   const context = `The DAO is voting on: "${proposal2.title}". Description: ${proposal2.description}. Treasury has ${dao.treasury} SOL. This proposal requests ${proposal2.requestedAmount} SOL.`;
+  //   const options = ['Vote FOR this proposal', 'Vote AGAINST this proposal'];
     
-    const decision = await agent.makeDecision(context, options);
-    const voteChoice = decision.includes('1') ? 'for' : 'against';
+  //   const decision = await agent.makeDecision(context, options);
+  //   const voteChoice = decision.includes('1') ? 'for' : 'against';
     
-    await dao.vote(agent, proposal2.id, voteChoice, voteCost);
-    await sleep(1500);
-  }
+  //   await dao.vote(agent, proposal2.id, voteChoice, voteCost);
+  //   await sleep(1500);
+  // }
 
   console.log('\n═══════════════════════════════════════════════════════\n');
 
@@ -134,8 +134,8 @@ console.log('💰 Using pre-funded wallets...\n');
   await dao.executeProposal(proposal1.id);
   await sleep(2000);
   
-  await dao.executeProposal(proposal2.id);
-  await sleep(2000);
+  // await dao.executeProposal(proposal2.id);
+  // await sleep(2000);
 
   console.log('\n═══════════════════════════════════════════════════════\n');
 

@@ -13,14 +13,20 @@ class Agent {
     this.proposalsCreated = 0;
     this.votescast = 0;
     
-    // Initialize wallet
-    if (walletPath && fs.existsSync(walletPath)) {
-      const secretKey = JSON.parse(fs.readFileSync(walletPath, 'utf-8'));
-      this.wallet = Keypair.fromSecretKey(Uint8Array.from(secretKey));
-    } else {
-      this.wallet = Keypair.generate();
-      this.saveWallet();
-    }
+    // Initialize wallet - check if wallet file exists first
+const walletsDir = path.join(process.cwd(), 'wallets');
+const defaultWalletPath = path.join(walletsDir, `${this.name.replace(/\s/g, '_')}_wallet.json`);
+const actualWalletPath = walletPath || defaultWalletPath;
+
+if (fs.existsSync(actualWalletPath)) {
+  console.log(`📂 Loading existing wallet for ${this.name}`);
+  const secretKey = JSON.parse(fs.readFileSync(actualWalletPath, 'utf-8'));
+  this.wallet = Keypair.fromSecretKey(Uint8Array.from(secretKey));
+} else {
+  console.log(`🆕 Creating NEW wallet for ${this.name}`);
+  this.wallet = Keypair.generate();
+  this.saveWallet();
+}
     
     // AWS Bedrock client
     this.bedrockClient = new BedrockRuntimeClient({
