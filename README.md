@@ -365,9 +365,9 @@ MIT License - see [LICENSE](./LICENSE) for details
 
 ## 📞 Contact
 
-- **GitHub:** [@yourusername](https://github.com/yourusername)
-- **Twitter:** [@yourhandle](https://twitter.com/yourhandle)
-- **Email:** your.email@example.com
+- **GitHub:** [@yourusername](https://github.com/nagavaishak)
+- **Twitter:** [@yourhandle](https://twitter.com/nagavaishak)
+- **Email:** nagavaishak@gmail.com
 
 ---
 
