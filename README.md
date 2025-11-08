@@ -365,8 +365,8 @@ MIT License - see [LICENSE](./LICENSE) for details
 
 ## 📞 Contact
 
-- **GitHub:** [@yourusername](https://github.com/nagavaishak)
-- **Twitter:** [@yourhandle](https://twitter.com/nagavaishak)
+- **GitHub:** (https://github.com/nagavaishak)
+- **Twitter:** (https://twitter.com/nagavaishak)
 - **Email:** nagavaishak@gmail.com
 
 ---
