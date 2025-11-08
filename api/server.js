@@ -135,10 +135,7 @@ async function runSimulation() {
 
   await sleep(2000);
 
-  // Create agents - USE EXISTING FUNDED WALLETS
-  console.log('🤖 Loading existing funded agents...\n');
-  broadcast({ type: 'STATUS', data: { message: 'Loading funded AI Agents...' } });
-
+  /// Create agents - USE EXISTING FUNDED WALLETS + NEW ONES
   const agents = [
     new Agent(
       'Alice_Progressive',
@@ -149,6 +146,21 @@ async function runSimulation() {
       'Bob_Conservative', 
       'You are conservative and cautious. You prefer stable, proven approaches and are skeptical of radical changes.',
       path.join(walletsPath, 'Bob_Conservative_wallet.json')
+    ),
+    new Agent(
+      'Charlie_Pragmatic',
+      'You are pragmatic and data-driven. You analyze cost-benefit ratios and vote based on measurable outcomes.',
+      path.join(walletsPath, 'Charlie_Pragmatic_wallet.json')
+    ),
+    new Agent(
+      'Diana_Visionary',
+      'You are a visionary idealist. You care deeply about long-term impact and ethical implications over short-term gains.',
+      path.join(walletsPath, 'Diana_Visionary_wallet.json')
+    ),
+    new Agent(
+      'Eve_Skeptic',
+      'You are a healthy skeptic. You question assumptions, demand evidence, and prefer incremental progress over grand visions.',
+      path.join(walletsPath, 'Eve_Skeptic_wallet.json')
     )
   ];
 
@@ -164,7 +176,7 @@ async function runSimulation() {
   console.log('\n👥 Agents joining DAO...\n');
   broadcast({ type: 'STATUS', data: { message: 'Agents joining DAO...' } });
 
-  const joinStake = parseFloat(process.env.JOINING_STAKE_USDC) || 0.5;
+  const joinStake = parseFloat(process.env.JOINING_STAKE_USDC) || 0.1;
   
   for (const agent of agents) {
     const success = await daoInstance.joinDAO(agent, joinStake);

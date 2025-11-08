@@ -143,7 +143,8 @@ class X402Payment {
       amount: req.amount,
       description: req.description,
       status: req.status,
-      timestamp: new Date(req.timestamp).toISOString()
+      timestamp: new Date(req.timestamp).toISOString(),
+      signature: req.signature || null  // ADD THIS LINE
     }));
   }
 }

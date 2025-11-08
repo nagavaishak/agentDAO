@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import AgentCard from '../components/AgentCard';
 import ProposalCard from '../components/ProposalCard';
-import PaymentStream from '../components/PaymentStream';
+import PaymentStream from '../components/PaymentStream.jsx';
 
 export default function AgentDAO() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -288,7 +288,7 @@ export default function AgentDAO() {
       />
 
       {/* Main Content */}
-      <div className="relative z-10 p-8">
+      <div className="relative z-10 ml-80 p-8">
         {/* Header */}
         <motion.header 
           initial={{ opacity: 0, y: -50 }}
@@ -408,13 +408,11 @@ export default function AgentDAO() {
       </div>
 
       {/* Payment Stream */}
-      {daoState.payments.length > 0 && (
         <PaymentStream payments={daoState.payments} />
-      )}
 
       {/* Bottom Stats Bar */}
       <motion.div 
-        className="fixed bottom-0 left-0 right-0 backdrop-blur-xl bg-black/50 border-t border-white/10 p-4"
+        className="fixed bottom-0 left-0 right-0 backdrop-blur-xl bg-black/50 border-t border-white/10 p-4 z-50"
         initial={{ y: 100 }}
         animate={{ y: 0 }}
       >
