@@ -321,6 +321,48 @@ async function runSimulation() {
     }
   });
 
+  // NEW: Call Yeager API to evaluate proposal (even if rejected, for analysis)
+  console.log('\n🔌 Agent calling Yeager API for proposal analysis...\n');
+  
+  broadcast({ 
+    type: 'STATUS', 
+    data: { message: 'Agent calling Yeager API to analyze proposal...' } 
+  });
+
+  await sleep(1000);
+
+  const analyzingAgent = agents[0]; // Alice analyzes the results
+  
+  const yeagerResult = await daoInstance.executeProposalViaYeager(
+    analyzingAgent,
+    proposal,
+    'proposal-evaluation'
+  );
+
+  if (yeagerResult) {
+    broadcast({ 
+      type: 'YEAGER_API_CALL', 
+      data: {
+        agent: analyzingAgent.name,
+        service: yeagerResult.service,
+        result: yeagerResult.result,
+        cost: yeagerResult.cost,
+        timestamp: yeagerResult.timestamp
+      }
+    });
+  }
+
+  await sleep(2000);
+
+  broadcast({ 
+    type: 'PROPOSAL_EXECUTED', 
+    data: {
+      proposalId: proposal.id,
+      status: proposal.status,
+      passed: passed
+    }
+  });
+
   if (passed) {
     const payments = daoInstance.x402.listPayments();
     broadcast({

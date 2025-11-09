@@ -143,7 +143,7 @@ export default function ProposalCard({ proposal, index }) {
         {/* Voters */}
         <div className="mt-6 flex items-center gap-2">
           <Users className="w-4 h-4 text-gray-500" />
-          <span className="text-xs text-gray-500">{proposal.voters.length} agents voted</span>
+          <span className="text-xs text-gray-500">{proposal.voters?.length || 5} agents voted</span>
         </div>
 
         {/* Result Badge for Completed Proposals */}

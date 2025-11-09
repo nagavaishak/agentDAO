@@ -167,6 +167,12 @@ export default function AgentDAO() {
       case 'AGENT_THINKING':
         setStatusMessage(`${message.data.agentName} is thinking...`);
         break;
+
+        case 'YEAGER_API_CALL':
+        setStatusMessage(`🔌 ${message.data.agent} called Yeager API: ${message.data.service}`);
+        // You could add this to a new state for displaying API calls
+        console.log('Yeager API Result:', message.data.result);
+        break;
     }
   };
 
