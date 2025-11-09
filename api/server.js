@@ -190,12 +190,20 @@ async function runSimulation() {
         }
       });
 
-      // Broadcast payment
+      // Broadcast payment with FULL signature
       const payments = daoInstance.x402.listPayments();
       if (payments.length > 0) {
+        const lastPayment = payments[payments.length - 1];
+        // Get full signature from payment requirements map
+        const fullPayment = Array.from(daoInstance.x402.paymentRequests.values())
+          .find(p => p.id === lastPayment.id);
+        
         broadcast({
           type: 'PAYMENT',
-          data: payments[payments.length - 1]
+          data: {
+            ...lastPayment,
+            signature: fullPayment?.signature || lastPayment.signature
+          }
         });
       }
     }
@@ -223,12 +231,22 @@ async function runSimulation() {
       data: proposal 
     });
 
-    // Broadcast payment
-    const payments = daoInstance.x402.listPayments();
-    broadcast({
-      type: 'PAYMENT',
-      data: payments[payments.length - 1]
-    });
+    // Broadcast payment with FULL signature
+      const payments = daoInstance.x402.listPayments();
+      if (payments.length > 0) {
+        const lastPayment = payments[payments.length - 1];
+        // Get full signature from payment requirements map
+        const fullPayment = Array.from(daoInstance.x402.paymentRequests.values())
+          .find(p => p.id === lastPayment.id);
+        
+        broadcast({
+          type: 'PAYMENT',
+          data: {
+            ...lastPayment,
+            signature: fullPayment?.signature || lastPayment.signature
+          }
+        });
+      }
   }
 
   await sleep(3000);
@@ -266,12 +284,22 @@ async function runSimulation() {
       }
     });
 
-    // Broadcast payment
-    const payments = daoInstance.x402.listPayments();
-    broadcast({
-      type: 'PAYMENT',
-      data: payments[payments.length - 1]
-    });
+    // Broadcast payment with FULL signature
+      const payments = daoInstance.x402.listPayments();
+      if (payments.length > 0) {
+        const lastPayment = payments[payments.length - 1];
+        // Get full signature from payment requirements map
+        const fullPayment = Array.from(daoInstance.x402.paymentRequests.values())
+          .find(p => p.id === lastPayment.id);
+        
+        broadcast({
+          type: 'PAYMENT',
+          data: {
+            ...lastPayment,
+            signature: fullPayment?.signature || lastPayment.signature
+          }
+        });
+      }
 
     await sleep(3000);
   }

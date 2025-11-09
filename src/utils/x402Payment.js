@@ -70,8 +70,8 @@ class X402Payment {
       paymentRequirement.signature = signature;
       paymentRequirement.completedAt = Date.now();
 
-      console.log(`   ✅ Payment Completed!`);
-      console.log(`   Signature: ${signature.substring(0, 16)}...`);
+      console.log('   ✅ Payment Completed!');
+      console.log(`   Signature: ${signature}`); 
 
       return {
         success: true,
@@ -144,7 +144,7 @@ class X402Payment {
       description: req.description,
       status: req.status,
       timestamp: new Date(req.timestamp).toISOString(),
-      signature: req.signature || null  // ADD THIS LINE
+      signature: req.signature || null
     }));
   }
 }
