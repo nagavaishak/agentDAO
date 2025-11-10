@@ -260,14 +260,16 @@ class DAO {
   async executeProposalViaYeager(agent, proposal, serviceName = 'proposal-evaluation') {
     console.log(`\n🤖 Agent "${agent.name}" executing proposal via Yeager API...`);
     
-    const payment = 0.1; // 0.1 USDC for service
+    const payment = 0.1;
     
     try {
       const result = await this.yeagerAPI.callService(
         agent,
         serviceName,
         proposal.title,
-        payment
+        payment,
+        this.x402,  // Pass x402 system
+        this.treasuryWallet.publicKey  // Pass treasury
       );
       
       return result;

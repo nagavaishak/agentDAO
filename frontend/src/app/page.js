@@ -18,7 +18,8 @@ export default function AgentDAO() {
     proposals: [],
     treasury: 0,
     payments: [],
-    stats: null
+    stats: null,
+    yeagerCalls: []
   });
 
   const wsRef = useRef(null);
@@ -168,10 +169,12 @@ export default function AgentDAO() {
         setStatusMessage(`${message.data.agentName} is thinking...`);
         break;
 
-        case 'YEAGER_API_CALL':
-        setStatusMessage(`🔌 ${message.data.agent} called Yeager API: ${message.data.service}`);
-        // You could add this to a new state for displaying API calls
-        console.log('Yeager API Result:', message.data.result);
+      case 'YEAGER_API_CALL':
+        setDaoState(prev => ({
+          ...prev,
+          yeagerCalls: [...(prev.yeagerCalls || []), message.data]
+        }));
+        setStatusMessage(`🔌 ${message.data.agent} called Yeager API!`);
         break;
     }
   };
@@ -411,7 +414,66 @@ export default function AgentDAO() {
             </div>
           </motion.div>
         )}
-      </div>
+
+      {/* Yeager API Calls */}
+        {daoState.yeagerCalls && daoState.yeagerCalls.length > 0 && (
+          <motion.div 
+            className="max-w-5xl mx-auto mb-32"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-white mb-4">🔌 Agent Service Calls</h2>
+              <p className="text-gray-400">Agents autonomously purchasing external services</p>
+            </div>
+
+            <div className="space-y-6">
+              {daoState.yeagerCalls.map((call, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: index * 0.2 }}
+                  className="backdrop-blur-xl bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-purple-500/30 rounded-2xl p-8 shadow-2xl"
+                >
+                  <div className="flex justify-between items-start mb-6">
+                    <div>
+                      <h3 className="text-2xl font-bold text-white mb-2">
+                        {call.agent ? call.agent.replace(/_/g, ' ') : 'Agent'}
+                      </h3>
+                      <p className="text-purple-300 text-lg">
+                        Purchased: Proposal Evaluation
+                      </p>
+                      <p className="text-purple-400 font-mono text-sm mt-2">
+                        💰 Cost: {call.cost} USDC via x402
+                      </p>
+                    </div>
+                    <span className="px-4 py-2 rounded-full bg-purple-500/20 border border-purple-400/50 text-purple-300 text-xs font-bold uppercase">
+                      Yeager API
+                    </span>
+                  </div>
+
+                  <div className="bg-black/30 rounded-xl p-6 border border-purple-500/20">
+                    <div className="text-sm text-purple-400 uppercase tracking-wider mb-3">
+                      📊 Analysis Result
+                    </div>
+                    <p className="text-white leading-relaxed">
+                      {call.result}
+                    </p>
+                  </div>
+
+                  <div className="mt-4 flex items-center gap-2 text-xs text-gray-500">
+                    <span>⚡ HTTP-402 Payment</span>
+                    <span>•</span>
+                    <span>{call.timestamp ? new Date(call.timestamp).toLocaleTimeString() : 'Now'}</span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+
+        </div>
 
       {/* Payment Stream */}
         <PaymentStream payments={daoState.payments} />

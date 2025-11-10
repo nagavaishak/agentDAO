@@ -2,6 +2,7 @@
  * Yeager API Integration for AgentDAO
  * Allows agents to autonomously purchase services via HTTP-402 payments
  */
+const { LAMPORTS_PER_SOL } = require('@solana/web3.js');
 
 class YeagerAPI {
   constructor() {
@@ -20,18 +21,36 @@ class YeagerAPI {
    * @param {string} taskDetails - Details of the task
    * @param {number} payment - Payment amount in USDC
    */
-  async callService(agent, serviceName, taskDetails, payment) {
+  async callService(agent, serviceName, taskDetails, payment, x402System, treasuryPublicKey) {
     console.log('\n🔌 YEAGER API INTEGRATION');
     console.log(`👤 Agent: ${agent.name}`);
     console.log(`🛠️  Service: ${serviceName}`);
     console.log(`💰 Payment: ${payment} USDC via x402`);
     console.log(`📋 Task: ${taskDetails}`);
 
+    // CREATE REAL X402 PAYMENT
+    if (x402System && treasuryPublicKey) {
+      const paymentReq = x402System.createPaymentRequirement(
+        payment,
+        `Yeager API: ${serviceName} for ${agent.name}`,
+        'yeager-api-service'
+      );
+
+      const paymentResult = await x402System.makePayment(
+        paymentReq,
+        agent.wallet,
+        treasuryPublicKey
+      );
+
+      if (!paymentResult.success) {
+        console.error('❌ Yeager payment failed');
+        return null;
+      }
+    }
+
     // Simulate API latency
     await this.sleep(2000);
 
-    // In production, this would make a real HTTP-402 request
-    // For demo, we simulate the response
     const service = this.services[serviceName] || this.services['data-analysis'];
     
     const result = {
