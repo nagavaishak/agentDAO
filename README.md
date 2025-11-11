@@ -8,7 +8,7 @@
 [![AWS Bedrock](https://img.shields.io/badge/AWS-Bedrock-orange?logo=amazon-aws)](https://aws.amazon.com/bedrock/)
 [![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org)
 
-![AgentDAO Demo](https://img.shields.io/badge/Live-Demo-success)
+![AgentDAO Demo](https://youtu.be/We560_HAEx8)
 
 ---
 
@@ -241,7 +241,7 @@ Designed to work with Phantom CASH:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/agentDAO.git
+git clone https://github.com/nagavaishak/agentDAO.git
 cd agentDAO
 ```
 
@@ -568,7 +568,7 @@ MIT License - see [LICENSE](./LICENSE) for details
    - HTTP-402 payment protocol
    - Autonomous service consumption
 
-**Demo Video:** [Link to video]
+**Demo Video:**(https://youtu.be/We560_HAEx8)
 
 **Live Demo:** `localhost:3001` (requires local setup)
 
@@ -576,10 +576,9 @@ MIT License - see [LICENSE](./LICENSE) for details
 
 ## 📞 Contact
 
-- **GitHub:** [@yourusername](https://github.com/yourusername)
-- **Twitter:** [@yourhandle](https://twitter.com/yourhandle)
-- **Email:** your.email@example.com
-- **Discord:** YourDiscord#1234
+- **GitHub:** https://github.com/nagavaishak
+- **Twitter:** https://twitter.com/nagavaishak
+- **Email:** nagavaishak@gmail.com
 
 ---
 
