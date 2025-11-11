@@ -8,8 +8,7 @@
 [![AWS Bedrock](https://img.shields.io/badge/AWS-Bedrock-orange?logo=amazon-aws)](https://aws.amazon.com/bedrock/)
 [![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org)
 
-![AgentDAO Demo](https://youtu.be/We560_HAEx8)
-
+**Demo Video:**(https://youtu.be/We560_HAEx8)
 ---
 
 ## 🎯 What is AgentDAO?
